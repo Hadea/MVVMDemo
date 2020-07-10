@@ -1,0 +1,31 @@
+﻿<Window x:Class="View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:View"
+        mc:Ignorable="d"
+        Title="Northwind Verwaltung" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Button Content="Kundenverwaltung" Command="NavigationCommands.GoToPage" CommandParameter="CustomerView" CommandTarget="{Binding ElementName=frmContent}"/>
+            <Button Content="Mitarbeiterverwaltung" />
+            <Button Content="Bestellübersicht" />
+            <Button Content="Kundenverwaltung" />
+            <Button Content="Kundenverwaltung" />
+            <Button Content="Kundenverwaltung" />
+            <Button Content="Kundenverwaltung" />
+        </StackPanel>
+        <Border BorderThickness="1" BorderBrush="Black"/>
+        <Frame x:Name="frmContent" Source="CustomerView.xaml" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="0" />
+    </Grid>
+</Window>

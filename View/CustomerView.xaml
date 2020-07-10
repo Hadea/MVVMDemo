@@ -1,0 +1,68 @@
+﻿<Page x:Class="View.CustomerView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="CustomerView">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding Path=CustomerList}" x:Name="dgCustomer" Grid.Row="0" Grid.Column="0" IsReadOnly="True"  SelectionMode="Single" CanUserAddRows="False"/>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Button Content="Hinzufügen" Command="{Binding Path=InsertCommand}" />
+            <Button Content="Entfernen" Command="{Binding Path=DropCommand}" />
+            <Button Content="Speichern" Command="{Binding Path=UpdateCommand}" />
+        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Grid Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Label Content="Kurzzeichen" Grid.Row="0" Grid.Column="0"/>
+            <Label Content="Firmenname" Grid.Row="1" Grid.Column="0"/>
+            <Label Content="Ansprechpartner" Grid.Row="2" Grid.Column="0"/>
+            <Label Content="Titel" Grid.Row="3" Grid.Column="0"/>
+            <Label Content="Adresse" Grid.Row="4" Grid.Column="0"/>
+            <Label Content="Stadt" Grid.Row="5" Grid.Column="0"/>
+            <Label Content="Region" Grid.Row="0" Grid.Column="2"/>
+            <Label Content="Postleitzahl" Grid.Row="1" Grid.Column="2"/>
+            <Label Content="Land" Grid.Row="2" Grid.Column="2"/>
+            <Label Content="Telefonnummer" Grid.Row="3" Grid.Column="2"/>
+            <Label Content="FaxNummer" Grid.Row="4" Grid.Column="2"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1"/>
+            <TextBox Grid.Row="1" Grid.Column="1"/>
+            <TextBox Grid.Row="2" Grid.Column="1"/>
+            <TextBox Grid.Row="3" Grid.Column="1"/>
+            <TextBox Grid.Row="4" Grid.Column="1"/>
+            <TextBox Grid.Row="5" Grid.Column="1"/>
+            <TextBox Grid.Row="0" Grid.Column="3"/>
+            <TextBox Grid.Row="1" Grid.Column="3"/>
+            <TextBox Grid.Row="2" Grid.Column="3"/>
+            <TextBox Grid.Row="3" Grid.Column="3"/>
+            <TextBox Grid.Row="4" Grid.Column="3"/>
+
+        </Grid>
+    </Grid>
+</Page>
