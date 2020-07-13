@@ -1,33 +1,61 @@
-﻿using Data.Commands;
-using Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Data.SQLite;
-using System.Text;
 using System.Windows.Input;
+using Data.Commands;
+using Data.Models;
 
 namespace Data.ViewModels
 {
     public class CustomerViewModel : BaseViewModel
     {
+
         public ObservableCollection<Customer> CustomerList { get; set; }
+
+        private Customer selectedCutomer = Customer.Empty();
+
+        public Customer SelectedCustomer
+        {
+            get { return selectedCutomer; }
+            set
+            {
+                if (selectedCutomer == value) return;
+
+                selectedCutomer = value;
+                OnPropertyChanged("SelectedCustomer");
+            }
+        }
+
+        private int selectedCustomerNumber;
+        public int SelectedCustomerNumber
+        {
+            get => selectedCustomerNumber;
+            set
+            {
+                if (selectedCustomerNumber == value) return; // nichts besonderes tun wenn der alte wert dem neuen entspricht.
+                
+                selectedCustomerNumber = value;
+                SelectedCustomer = CustomerList[value];
+                OnPropertyChanged("SelectedCustomerNumber");
+            }
+        }
 
         public CustomerViewModel()
         {
             CustomerList = new ObservableCollection<Customer>();
-            LoadData();
+            loadData();
         }
 
         #region Bereich für Kommandos welche vom GUI gestartet werden
+
         private ICommand updateCommand;
         private ICommand dropCommand;
         private ICommand insertCommand;
+
         public ICommand UpdateCommand
         {
             get
             {
-                if (updateCommand == null) updateCommand = new EmployeeUpdate();
+                if (updateCommand == null) updateCommand = new Relay(CanUpdateCustomer, UpdateCustomer);
                 return updateCommand;
             }
             set { updateCommand = value; }
@@ -36,16 +64,16 @@ namespace Data.ViewModels
         {
             get
             {
-                if (dropCommand == null) dropCommand = new EmployeeDrop();
+                if (dropCommand == null) dropCommand = new Relay(CanDeleteCustomer, DeleteCustomer);
                 return dropCommand;
             }
             set { dropCommand = value; }
         }
-        public ICommand InserCommand
+        public ICommand InsertCommand
         {
             get
             {
-                if (insertCommand == null) insertCommand = new EmployeeInsert();
+                if (insertCommand == null) insertCommand = new Relay(CanInsertCustomer, InsertCustomer);
                 return insertCommand;
             }
             set { insertCommand = value; }
@@ -53,8 +81,9 @@ namespace Data.ViewModels
 
         #endregion
 
-        private void LoadData()
+        private void loadData()
         {
+#pragma warning disable IDE0063 //deaktiviert die angebotene optimierung des using statements
             using (SQLiteConnection sqlConnection = new SQLiteConnection(@"Data Source=.\Database\northwindEF.db; Version=3;"))
             {
                 SQLiteCommand sqlCommand = sqlConnection.CreateCommand();
@@ -66,25 +95,57 @@ namespace Data.ViewModels
                     CustomerList.Clear();
                     while (reader.Read())
                     {
-                        Customer newCustomer = new Customer();
-
-                        newCustomer.CustomerID = Helper.GetNullableString(reader, 0);
-                        newCustomer.CompanyName = Helper.GetNullableString(reader, 1);
-                        newCustomer.ContactName = Helper.GetNullableString(reader, 2);
-                        newCustomer.ContactTitle = Helper.GetNullableString(reader, 3);
-                        newCustomer.Address = Helper.GetNullableString(reader, 4);
-                        newCustomer.City = Helper.GetNullableString(reader, 5);
-                        newCustomer.Region = Helper.GetNullableString(reader, 6);
-                        newCustomer.PostalCode = Helper.GetNullableString(reader, 7);
-                        newCustomer.Country = Helper.GetNullableString(reader, 8);
-                        newCustomer.Phone = Helper.GetNullableString(reader, 9);
-                        newCustomer.Fax = Helper.GetNullableString(reader, 10);
+                        Customer newCustomer = new Customer
+                        {
+                            CustomerID = Helper.GetNullableString(reader, 0),
+                            CompanyName = Helper.GetNullableString(reader, 1),
+                            ContactName = Helper.GetNullableString(reader, 2),
+                            ContactTitle = Helper.GetNullableString(reader, 3),
+                            Address = Helper.GetNullableString(reader, 4),
+                            City = Helper.GetNullableString(reader, 5),
+                            Region = Helper.GetNullableString(reader, 6),
+                            PostalCode = Helper.GetNullableString(reader, 7),
+                            Country = Helper.GetNullableString(reader, 8),
+                            Phone = Helper.GetNullableString(reader, 9),
+                            Fax = Helper.GetNullableString(reader, 10)
+                        };
                         CustomerList.Add(newCustomer);
 
 
                     }
                 }
             }
+#pragma warning restore IDE0063
+        }
+
+        private void InsertCustomer()
+        {
+            //TODO implement insert customer
+        }
+
+        private void UpdateCustomer()
+        {
+            //TODO implement update customer
+        }
+
+        private void DeleteCustomer()
+        {
+            //TODO implement Delete customer
+        }
+
+        private bool CanInsertCustomer()
+        {
+            return true;//TODO implement Test
+        }
+
+        private bool CanUpdateCustomer()
+        {
+            return true;//TODO implement Test
+        }
+
+        private bool CanDeleteCustomer()
+        {
+            return true;//TODO implement Test
         }
     }
 }

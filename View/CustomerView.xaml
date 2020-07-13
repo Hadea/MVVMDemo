@@ -7,7 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="600"
       Title="CustomerView">
-
+    <Page.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="3" />
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400" />
@@ -17,14 +21,12 @@
             <RowDefinition Height="200"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Path=CustomerList}" x:Name="dgCustomer" Grid.Row="0" Grid.Column="0" IsReadOnly="True"  SelectionMode="Single" CanUserAddRows="False"/>
-        <StackPanel Grid.Row="0" Grid.Column="1">
-            <Button Content="Hinzufügen" Command="{Binding Path=InsertCommand}" />
-            <Button Content="Entfernen" Command="{Binding Path=DropCommand}" />
-            <Button Content="Speichern" Command="{Binding Path=UpdateCommand}" />
-        </StackPanel>
+        <DataGrid ItemsSource="{Binding Path=CustomerList}" SelectedIndex="{Binding SelectedCustomerNumber, Mode=TwoWay}" x:Name="dgCustomer" Grid.Row="0" Grid.Column="0" IsReadOnly="True"  SelectionMode="Single" CanUserAddRows="False"/>
+
+        <Button Content="Hinzufügen" Command="{Binding Path=InsertCommand}" Grid.Column="1" Width="70" Height="30"/>
+
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Grid Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+        <Grid Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -39,29 +41,31 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
-            <Label Content="Kurzzeichen" Grid.Row="0" Grid.Column="0"/>
-            <Label Content="Firmenname" Grid.Row="1" Grid.Column="0"/>
-            <Label Content="Ansprechpartner" Grid.Row="2" Grid.Column="0"/>
-            <Label Content="Titel" Grid.Row="3" Grid.Column="0"/>
-            <Label Content="Adresse" Grid.Row="4" Grid.Column="0"/>
-            <Label Content="Stadt" Grid.Row="5" Grid.Column="0"/>
-            <Label Content="Region" Grid.Row="0" Grid.Column="2"/>
-            <Label Content="Postleitzahl" Grid.Row="1" Grid.Column="2"/>
-            <Label Content="Land" Grid.Row="2" Grid.Column="2"/>
-            <Label Content="Telefonnummer" Grid.Row="3" Grid.Column="2"/>
-            <Label Content="FaxNummer" Grid.Row="4" Grid.Column="2"/>
+            <Label Content="_Kurzzeichen" Grid.Row="0" Grid.Column="0"/>
+            <Label Content="_Firmenname" Grid.Row="1" Grid.Column="0"/>
+            <Label Content="_Ansprechpartner" Grid.Row="2" Grid.Column="0"/>
+            <Label Content="_Titel" Grid.Row="3" Grid.Column="0"/>
+            <Label Content="_Adresse" Grid.Row="4" Grid.Column="0"/>
+            <Label Content="_Stadt" Grid.Row="5" Grid.Column="0"/>
+            <Label Content="_Region" Grid.Row="0" Grid.Column="2"/>
+            <Label Content="_Postleitzahl" Grid.Row="1" Grid.Column="2"/>
+            <Label Content="_Land" Grid.Row="2" Grid.Column="2"/>
+            <Label Content="_Telefonnummer" Grid.Row="3" Grid.Column="2"/>
+            <Label Content="_FaxNummer" Grid.Row="4" Grid.Column="2"/>
 
-            <TextBox Grid.Row="0" Grid.Column="1"/>
-            <TextBox Grid.Row="1" Grid.Column="1"/>
-            <TextBox Grid.Row="2" Grid.Column="1"/>
-            <TextBox Grid.Row="3" Grid.Column="1"/>
-            <TextBox Grid.Row="4" Grid.Column="1"/>
-            <TextBox Grid.Row="5" Grid.Column="1"/>
-            <TextBox Grid.Row="0" Grid.Column="3"/>
-            <TextBox Grid.Row="1" Grid.Column="3"/>
-            <TextBox Grid.Row="2" Grid.Column="3"/>
-            <TextBox Grid.Row="3" Grid.Column="3"/>
-            <TextBox Grid.Row="4" Grid.Column="3"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding CustomerID, Mode=TwoWay}"  Grid.Row="0" Grid.Column="1"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding CompanyName , Mode=TwoWay}" Grid.Row="1" Grid.Column="1"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding ContactName   , Mode=TwoWay}"  Grid.Row="2" Grid.Column="1"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding ContactTitle  , Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding Address  , Mode=TwoWay}"  Grid.Row="4" Grid.Column="1"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding City , Mode=TwoWay}"  Grid.Row="5" Grid.Column="1"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding Region , Mode=TwoWay}"  Grid.Row="0" Grid.Column="3"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding PostalCode , Mode=TwoWay}"  Grid.Row="1" Grid.Column="3"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding Country , Mode=TwoWay}"  Grid.Row="2" Grid.Column="3"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding Phone  , Mode=TwoWay}"  Grid.Row="3" Grid.Column="3"/>
+            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding Fax  , Mode=TwoWay}"  Grid.Row="4" Grid.Column="3"/>
+            <Button Content="Entfernen" Command="{Binding Path=DropCommand}" Grid.Column="2" Grid.Row="5" />
+            <Button Content="Speichern" Command="{Binding Path=UpdateCommand}" Grid.Column="3" Grid.Row="5" />
 
         </Grid>
     </Grid>

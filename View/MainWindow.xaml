@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="Northwind Verwaltung" Height="450" Width="800">
+        Title="Northwind Verwaltung" Height="500" Width="800">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="3"/>
@@ -17,13 +17,13 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0">
-            <Button Content="Kundenverwaltung" Command="NavigationCommands.GoToPage" CommandParameter="CustomerView" CommandTarget="{Binding ElementName=frmContent}"/>
-            <Button Content="Mitarbeiterverwaltung" />
-            <Button Content="Bestellübersicht" />
-            <Button Content="Kundenverwaltung" />
-            <Button Content="Kundenverwaltung" />
-            <Button Content="Kundenverwaltung" />
-            <Button Content="Kundenverwaltung" />
+            <Button IsEnabled="False" Content="Kundenverwaltung"/>
+            <Button IsEnabled="False" Content="Mitarbeiterverwaltung" />
+            <Button IsEnabled="False" Content="Bestellübersicht" />
+            <Button IsEnabled="False" Content="Kundenverwaltung" />
+            <Button IsEnabled="False" Content="Kundenverwaltung" />
+            <Button IsEnabled="False" Content="Kundenverwaltung" />
+            <Button IsEnabled="False" Content="Kundenverwaltung" />
         </StackPanel>
         <Border BorderThickness="1" BorderBrush="Black"/>
         <Frame x:Name="frmContent" Source="CustomerView.xaml" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="0" />

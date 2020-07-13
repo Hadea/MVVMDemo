@@ -7,12 +7,18 @@ using System.Windows.Input;
 
 namespace Data.ViewModels
 {
+    /// <summary>
+    /// Basisklasse für alle ViewModel
+    /// </summary>
     public class BaseViewModel : INotifyPropertyChanged, IDisposable, IAsyncDisposable
     {
 
         public event PropertyChangedEventHandler PropertyChanged; //Event welches ausgelöst wird wenn sich ein Element ändert und das UI informiert werden soll.
 
-
+        protected void OnPropertyChanged(string pPropertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(pPropertyName));
+        }
 
         #region Bereich zum Verwerfen des Objektes
         private bool disposedValue; // Verhindert mehrfaches verwerfen des Objektes, was andernfalls Fehler erzeugen könnte
@@ -65,6 +71,9 @@ namespace Data.ViewModels
         /// Verwirft verwaltete Ressourcen asyncron. Wird durch DisposeAsync() aufgerufen und sollte von ableitenden Klassen überschrieben werden.
         /// </summary>
         /// <returns></returns>
+        /// 
+
+#pragma warning disable CS1998  //deaktiviert die await-Warnung
         protected virtual async ValueTask DisposeAsyncCore()
         {
             //TODO: add code for disposing async. Excample:
@@ -74,6 +83,7 @@ namespace Data.ViewModels
             //    ressource = null;
             //}
         }
+#pragma warning restore
         #endregion
     }
 }

@@ -5,6 +5,9 @@ using System.Threading.Channels;
 
 namespace Data.Models
 {
+    /// <summary>
+    /// Repräsentation eines Employee aus der Northwind Datenbank
+    /// </summary>
     public class Employee : BaseModel
     {
         private string firstName;

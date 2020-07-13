@@ -1,5 +1,8 @@
 ﻿namespace Data.Models
 {
+    /// <summary>
+    /// Repräsentiert einen Customer aus der Northwind Datenbank.
+    /// </summary>
     public class Customer : BaseModel
     {
         // 1:1 repräsentation der Tabellenstruktur der Datenbank
@@ -115,6 +118,28 @@
                 fax = value;
                 OnPropertyChanged("Fax");
             }
+        }
+
+        /// <summary>
+        /// Erstellt einen Customer bei dem jeder Eintrag ein leerer String ist.
+        /// </summary>
+        /// <returns>Customer mit Leeren Strings in den Properties</returns>
+        public static Customer Empty()
+        {
+            return new Customer
+            {
+                CustomerID = "",
+                Address = "",
+                City = "",
+                CompanyName = "",
+                ContactName = "",
+                ContactTitle = "",
+                Country = "",
+                Fax = "",
+                Phone = "",
+                PostalCode = "",
+                Region = ""
+            };
         }
     }
 }

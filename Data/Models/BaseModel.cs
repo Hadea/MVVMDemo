@@ -18,10 +18,7 @@ namespace Data.Models
         /// <param name="pPropertyName">Name des Property welches geändert wurde</param>
         protected void OnPropertyChanged(string pPropertyName)
         {
-            if (PropertyChanged != null) // Event PropertyChanged nur auslösen wenn auch etwas angehängt ist. Andernfalls gibt es hier einen Fehler.
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(pPropertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(pPropertyName));
         }
     }
 }
