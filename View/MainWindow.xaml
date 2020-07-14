@@ -17,8 +17,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0">
-            <Button IsEnabled="False" Content="Kundenverwaltung"/>
-            <Button IsEnabled="False" Content="Mitarbeiterverwaltung" />
+            <Button IsEnabled="True" Content="Kundenverwaltung" Click="btnCustomer_Click" />
+            <Button IsEnabled="True" Content="Kunde hinzufügen" Click="btnCustomerNew_Click" />
             <Button IsEnabled="False" Content="Bestellübersicht" />
             <Button IsEnabled="False" Content="Kundenverwaltung" />
             <Button IsEnabled="False" Content="Kundenverwaltung" />
@@ -26,6 +26,6 @@
             <Button IsEnabled="False" Content="Kundenverwaltung" />
         </StackPanel>
         <Border BorderThickness="1" BorderBrush="Black"/>
-        <Frame x:Name="frmContent" Source="CustomerView.xaml" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="0" />
+        <Frame x:Name="frmContent" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="0" />
     </Grid>
 </Window>

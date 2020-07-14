@@ -11,9 +11,6 @@ namespace View
         public CustomerView()
         {
             InitializeComponent();
-
-            DataContext = new CustomerViewModel();
-
         }
     }
 }
