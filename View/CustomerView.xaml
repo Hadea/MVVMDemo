@@ -8,25 +8,30 @@
       d:DesignHeight="450" d:DesignWidth="600"
       Title="CustomerView">
     <Page.Resources>
-        <Style TargetType="TextBox">
+        <Style x:Key="BaseMargin" TargetType="Control">
             <Setter Property="Margin" Value="3" />
         </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource BaseMargin}"/>
+        <Style TargetType="Button" BasedOn="{StaticResource BaseMargin}"/>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Path=CustomerList}" SelectedIndex="{Binding SelectedCustomerNumber, Mode=TwoWay}" x:Name="dgCustomer" Grid.Row="0" Grid.Column="0" IsReadOnly="True"  SelectionMode="Single" CanUserAddRows="False"/>
-
-        <Button Content="Hinzufügen" Command="{Binding Path=InsertCommand}" Grid.Column="1" Width="70" Height="30"/>
-
+        <DataGrid ItemsSource="{Binding Path=CustomerList}" AutoGenerateColumns="False" SelectedIndex="{Binding SelectedCustomerNumber, Mode=TwoWay}" x:Name="dgCustomer" Grid.Row="0" Grid.Column="0" IsReadOnly="True"  SelectionMode="Single" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Firmenname" Binding="{Binding CompanyName}"/>
+                <DataGridTextColumn Header="Telefon" Binding="{Binding Phone}"/>
+                <DataGridTextColumn Header="Ansprechpartner" Binding="{Binding ContactName}"/>
+                <DataGridTextColumn Header="Position" Binding="{Binding ContactTitle}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Grid Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
+        <Grid Margin="5" Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -41,7 +46,7 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
-            <Label Content="_Kurzzeichen" Grid.Row="0" Grid.Column="0"/>
+            <Label Content="Kurzzeichen" Grid.Row="0" Grid.Column="0"/>
             <Label Content="_Firmenname" Grid.Row="1" Grid.Column="0"/>
             <Label Content="_Ansprechpartner" Grid.Row="2" Grid.Column="0"/>
             <Label Content="_Titel" Grid.Row="3" Grid.Column="0"/>
@@ -53,19 +58,19 @@
             <Label Content="_Telefonnummer" Grid.Row="3" Grid.Column="2"/>
             <Label Content="_FaxNummer" Grid.Row="4" Grid.Column="2"/>
 
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding CustomerID, Mode=TwoWay}"  Grid.Row="0" Grid.Column="1"/>
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding CompanyName , Mode=TwoWay}" Grid.Row="1" Grid.Column="1"/>
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding ContactName   , Mode=TwoWay}"  Grid.Row="2" Grid.Column="1"/>
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding ContactTitle  , Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding Address  , Mode=TwoWay}"  Grid.Row="4" Grid.Column="1"/>
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding City , Mode=TwoWay}"  Grid.Row="5" Grid.Column="1"/>
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding Region , Mode=TwoWay}"  Grid.Row="0" Grid.Column="3"/>
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding PostalCode , Mode=TwoWay}"  Grid.Row="1" Grid.Column="3"/>
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding Country , Mode=TwoWay}"  Grid.Row="2" Grid.Column="3"/>
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding Phone  , Mode=TwoWay}"  Grid.Row="3" Grid.Column="3"/>
-            <TextBox DataContext="{Binding SelectedCustomer}" Text="{Binding Fax  , Mode=TwoWay}"  Grid.Row="4" Grid.Column="3"/>
-            <Button Content="Entfernen" Command="{Binding Path=DropCommand}" Grid.Column="2" Grid.Row="5" />
-            <Button Content="Speichern" Command="{Binding Path=UpdateCommand}" Grid.Column="3" Grid.Row="5" />
+            <TextBox IsReadOnly="True" TabIndex="1" DataContext="{Binding SelectedCustomer}" Text="{Binding CustomerID, Mode=TwoWay}"  Grid.Row="0" Grid.Column="1"/>
+            <TextBox TabIndex="2" DataContext="{Binding SelectedCustomer}" Text="{Binding CompanyName , Mode=TwoWay}" Grid.Row="1" Grid.Column="1"/>
+            <TextBox TabIndex="3" DataContext="{Binding SelectedCustomer}" Text="{Binding ContactName   , Mode=TwoWay}"  Grid.Row="2" Grid.Column="1"/>
+            <TextBox TabIndex="4" DataContext="{Binding SelectedCustomer}" Text="{Binding ContactTitle  , Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
+            <TextBox TabIndex="5" DataContext="{Binding SelectedCustomer}" Text="{Binding Address  , Mode=TwoWay}"  Grid.Row="4" Grid.Column="1"/>
+            <TextBox TabIndex="6" DataContext="{Binding SelectedCustomer}" Text="{Binding City , Mode=TwoWay}"  Grid.Row="5" Grid.Column="1"/>
+            <TextBox TabIndex="7" DataContext="{Binding SelectedCustomer}" Text="{Binding Region , Mode=TwoWay}"  Grid.Row="0" Grid.Column="3"/>
+            <TextBox TabIndex="8" DataContext="{Binding SelectedCustomer}" Text="{Binding PostalCode , Mode=TwoWay}"  Grid.Row="1" Grid.Column="3"/>
+            <TextBox TabIndex="9" DataContext="{Binding SelectedCustomer}" Text="{Binding Country , Mode=TwoWay}"  Grid.Row="2" Grid.Column="3"/>
+            <TextBox TabIndex="10" DataContext="{Binding SelectedCustomer}" Text="{Binding Phone  , Mode=TwoWay}"  Grid.Row="3" Grid.Column="3"/>
+            <TextBox TabIndex="11" DataContext="{Binding SelectedCustomer}" Text="{Binding Fax  , Mode=TwoWay}"  Grid.Row="4" Grid.Column="3"/>
+            <Button IsEnabled="False" Content="Entfernen" Command="{Binding Path=DropCommand}" Grid.Column="2" Grid.Row="5" />
+            <Button IsEnabled="False" Content="Speichern" Command="{Binding Path=UpdateCommand}" Grid.Column="3" Grid.Row="5" />
 
         </Grid>
     </Grid>
