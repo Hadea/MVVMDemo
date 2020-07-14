@@ -6,11 +6,6 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         Title="Northwind Verwaltung" Height="500" Width="800">
-    <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="3"/>
-        </Style>
-    </Window.Resources>
     <Grid Margin="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />

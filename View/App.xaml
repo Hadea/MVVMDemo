@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+            <!-- Alle hier angegebenen Einstellungen und Ressourcen gelten für alle Fenster (Window) und Seiten (Page) -->
+            <Style x:Key="BaseMargin" TargetType="Control">
+                <Setter Property="Margin" Value="3" />
+            </Style>
+            <Style TargetType="TextBox" BasedOn="{StaticResource BaseMargin}"/>
+            <Style TargetType="Button" BasedOn="{StaticResource BaseMargin}"/>
     </Application.Resources>
 </Application>

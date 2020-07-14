@@ -7,13 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="600"
       Title="CustomerView">
-    <Page.Resources>
-        <Style x:Key="BaseMargin" TargetType="Control">
-            <Setter Property="Margin" Value="3" />
-        </Style>
-        <Style TargetType="TextBox" BasedOn="{StaticResource BaseMargin}"/>
-        <Style TargetType="Button" BasedOn="{StaticResource BaseMargin}"/>
-    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
