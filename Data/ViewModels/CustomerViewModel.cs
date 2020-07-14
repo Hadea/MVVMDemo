@@ -8,19 +8,18 @@ namespace Data.ViewModels
 {
     public class CustomerViewModel : BaseViewModel
     {
-
         public ObservableCollection<Customer> CustomerList { get; set; }
 
-        private Customer selectedCutomer = Customer.Empty();
+        private Customer selectedCustomer;
 
         public Customer SelectedCustomer
         {
-            get { return selectedCutomer; }
+            get { return selectedCustomer; }
             set
             {
-                if (selectedCutomer == value) return;
+                if (selectedCustomer == value) return;
 
-                selectedCutomer = value;
+                selectedCustomer = value;
                 OnPropertyChanged("SelectedCustomer");
             }
         }
@@ -32,10 +31,17 @@ namespace Data.ViewModels
             set
             {
                 if (selectedCustomerNumber == value) return; // nichts besonderes tun wenn der alte wert dem neuen entspricht.
-                
                 selectedCustomerNumber = value;
-                SelectedCustomer = CustomerList[value];
+                if (selectedCustomerNumber == -1) // wenn nichts ausgewählt wurde (durch löschen oder deselectieren)
+                {
+                    SelectedCustomer = null;
+                }
+                else
+                {
+                    SelectedCustomer = CustomerList[value];
+                }
                 OnPropertyChanged("SelectedCustomerNumber");
+                dropCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -47,20 +53,9 @@ namespace Data.ViewModels
 
         #region Bereich für Kommandos welche vom GUI gestartet werden
 
-        private ICommand updateCommand;
-        private ICommand dropCommand;
-        private ICommand insertCommand;
+        private Relay dropCommand;
 
-        public ICommand UpdateCommand
-        {
-            get
-            {
-                if (updateCommand == null) updateCommand = new Relay(CanUpdateCustomer, UpdateCustomer);
-                return updateCommand;
-            }
-            set { updateCommand = value; }
-        }
-        public ICommand DropCommand
+        public Relay DropCommand
         {
             get
             {
@@ -68,15 +63,6 @@ namespace Data.ViewModels
                 return dropCommand;
             }
             set { dropCommand = value; }
-        }
-        public ICommand InsertCommand
-        {
-            get
-            {
-                if (insertCommand == null) insertCommand = new Relay(CanInsertCustomer, InsertCustomer);
-                return insertCommand;
-            }
-            set { insertCommand = value; }
         }
 
         #endregion
@@ -120,7 +106,7 @@ namespace Data.ViewModels
 
         private void InsertCustomer()
         {
-            //TODO implement insert customer
+            SelectedCustomer = Customer.Empty();
         }
 
         private void UpdateCustomer()
@@ -130,7 +116,9 @@ namespace Data.ViewModels
 
         private void DeleteCustomer()
         {
-            //TODO implement Delete customer
+            CustomerList.Remove(selectedCustomer);
+            selectedCustomer = null;
+            //TODO notify database
         }
 
         private bool CanInsertCustomer()
@@ -145,7 +133,7 @@ namespace Data.ViewModels
 
         private bool CanDeleteCustomer()
         {
-            return true;//TODO implement Test
+            return selectedCustomer != null; // testet ob ein Customer ausgewählt wurde. Das ergebnis ist dann auch direkt die Antwort der Methode.
         }
     }
 }

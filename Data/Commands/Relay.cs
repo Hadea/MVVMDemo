@@ -33,5 +33,10 @@ namespace Data.Commands
         {
             executeAction();
         }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
+        }
     }
 }
