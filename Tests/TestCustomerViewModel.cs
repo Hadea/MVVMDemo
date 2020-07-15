@@ -12,13 +12,13 @@ namespace Test
         [TestMethod]
         public void Insert_CommandExists()
         {
-            Assert.IsNotNull(cVM.InsertCommand);
+            Assert.IsNotNull(cVM.InsertCustomerCommand);
         }
 
         [TestMethod]
         public void Insert_WithoutData()
         {
-            Assert.AreEqual(cVM.InsertCommand.CanExecute(null), true, "Insert should not be possible without Data");
+            Assert.AreEqual(cVM.InsertCustomerCommand.CanExecute(null), true, "Insert should not be possible without Data");
         }
 
 
