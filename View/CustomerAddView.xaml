@@ -4,11 +4,58 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:View"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerAddView">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="_Kurzzeichen" Grid.Row="0" Grid.Column="0"/>
+        <Label Content="_Firmenname" Grid.Row="1" Grid.Column="0"/>
+        <Label Content="_Ansprechpartner" Grid.Row="2" Grid.Column="0"/>
+        <Label Content="_Titel" Grid.Row="3" Grid.Column="0"/>
+        <Label Content="_Adresse" Grid.Row="4" Grid.Column="0"/>
+        <Label Content="_Stadt" Grid.Row="5" Grid.Column="0"/>
+        <Label Content="_Region" Grid.Row="0" Grid.Column="2"/>
+        <Label Content="_Postleitzahl" Grid.Row="1" Grid.Column="2"/>
+        <Label Content="_Land" Grid.Row="2" Grid.Column="2"/>
+        <Label Content="_Telefonnummer" Grid.Row="3" Grid.Column="2"/>
+        <Label Content="_FaxNummer" Grid.Row="4" Grid.Column="2"/>
+
+        <TextBox TabIndex="1" DataContext="{Binding SelectedCustomer}" Text="{Binding CustomerID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Grid.Column="1">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction Command="{Binding InsertCustomerCommand.RaiseCanExecuteChanged}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <TextBox TabIndex="2" DataContext="{Binding SelectedCustomer}" Text="{Binding CompanyName , Mode=TwoWay}" Grid.Row="1" Grid.Column="1"/>
+        <TextBox TabIndex="3" DataContext="{Binding SelectedCustomer}" Text="{Binding ContactName   , Mode=TwoWay}"  Grid.Row="2" Grid.Column="1"/>
+        <TextBox TabIndex="4" DataContext="{Binding SelectedCustomer}" Text="{Binding ContactTitle  , Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
+        <TextBox TabIndex="5" DataContext="{Binding SelectedCustomer}" Text="{Binding Address  , Mode=TwoWay}"  Grid.Row="4" Grid.Column="1"/>
+        <TextBox TabIndex="6" DataContext="{Binding SelectedCustomer}" Text="{Binding City , Mode=TwoWay}"  Grid.Row="5" Grid.Column="1"/>
+        <TextBox TabIndex="7" DataContext="{Binding SelectedCustomer}" Text="{Binding Region , Mode=TwoWay}"  Grid.Row="0" Grid.Column="3"/>
+        <TextBox TabIndex="8" DataContext="{Binding SelectedCustomer}" Text="{Binding PostalCode , Mode=TwoWay}"  Grid.Row="1" Grid.Column="3"/>
+        <TextBox TabIndex="9" DataContext="{Binding SelectedCustomer}" Text="{Binding Country , Mode=TwoWay}"  Grid.Row="2" Grid.Column="3"/>
+        <TextBox TabIndex="10" DataContext="{Binding SelectedCustomer}" Text="{Binding Phone  , Mode=TwoWay}"  Grid.Row="3" Grid.Column="3"/>
+        <TextBox TabIndex="11" DataContext="{Binding SelectedCustomer}" Text="{Binding Fax  , Mode=TwoWay}"  Grid.Row="4" Grid.Column="3"/>
+        <Button Content="Anlegen" Command="{Binding Path=InsertCustomerCommand}" Grid.Column="3" Grid.Row="5" />
+        <Button Content="Neu" Command="{Binding Path=NewCustomerCommand}" Grid.Column="2" Grid.Row="5" />
+
     </Grid>
 </Page>
