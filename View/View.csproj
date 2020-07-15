@@ -4,7 +4,17 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>NorthwindVerwaltung</AssemblyName>
+    <StartupObject>View.App</StartupObject>
+    <Description>Eine Verwaltungs-Applikation für die Northwind Datenbank.</Description>
+    <RepositoryUrl>https://github.com/Hadea/MVVMDemo</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <NeutralLanguage>de-DE</NeutralLanguage>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj" />
