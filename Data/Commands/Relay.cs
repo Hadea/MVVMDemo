@@ -38,5 +38,10 @@ namespace Data.Commands
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }
+
+        public void RaiseCanExecuteChanged(object sender, EventArgs e)
+        {
+            CanExecuteChanged?.Invoke(sender, e);
+        }
     }
 }

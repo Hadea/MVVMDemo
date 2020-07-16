@@ -48,22 +48,26 @@ namespace Data.ViewModels
         public CustomerViewModel()
         {
             CustomerList = new ObservableCollection<Customer>();
+            InsertCustomerCommand = new Relay(CanInsertCustomer, InsertCustomer);
+            NewCustomerCommand = new Relay(() => { return true; }, NewCustomer);
             loadData();
         }
 
         #region Bereich für Kommandos welche vom GUI gestartet werden
 
         private Relay dropCommand;
-
         public Relay DropCommand
         {
             get
             {
-                if (dropCommand == null) dropCommand = new Relay(CanDeleteCustomer, DeleteCustomer);
+                if (dropCommand == null) dropCommand = new Relay(CanDeleteCustomer, DeleteCustomer); // "Lazy initialization", Das kommando wird nicht im Konstruktor befüllt sondern erst bei der Verwendung. Dadurch bleibt der Konstruktor klein und schnell.
                 return dropCommand;
             }
             set { dropCommand = value; }
         }
+
+        public Relay NewCustomerCommand { get; set; }
+        public Relay InsertCustomerCommand { get; set; }
 
         #endregion
 
@@ -106,7 +110,15 @@ namespace Data.ViewModels
 
         private void InsertCustomer()
         {
+            CustomerList.Add(SelectedCustomer);
+            SelectedCustomer.PropertyChanged -= InsertCustomerCommand.RaiseCanExecuteChanged;
+            NewCustomer();
+        }
+
+        private void NewCustomer()
+        {
             SelectedCustomer = Customer.Empty();
+            SelectedCustomer.PropertyChanged += InsertCustomerCommand.RaiseCanExecuteChanged;
         }
 
         private void UpdateCustomer()
@@ -123,7 +135,25 @@ namespace Data.ViewModels
 
         private bool CanInsertCustomer()
         {
-            return true;//TODO implement Test
+            //Existiert ein Objekt zum anhängen?
+            if (selectedCustomer == null) return false;
+
+            //Länge der Felder prüfen ohne dabei Leerzeichen mitzuzählen.
+            if (selectedCustomer.Address.Trim().Length < 4 ||
+                selectedCustomer.City.Trim().Length < 4 ||
+                selectedCustomer.CompanyName.Trim().Length < 4 ||
+                selectedCustomer.ContactName.Trim().Length < 4 ||
+                selectedCustomer.ContactTitle.Trim().Length < 4 ||
+                selectedCustomer.Country.Trim().Length < 4 ||
+                selectedCustomer.CustomerID.Trim().Length != 5 ||
+                selectedCustomer.Fax.Trim().Length < 8 ||
+                selectedCustomer.Phone.Trim().Length < 4 ||
+                selectedCustomer.PostalCode.Trim().Length < 4 ||
+                selectedCustomer.Region.Trim().Length < 4
+                ) return false;
+
+            //TODO: auf duplikate prüfen
+            return true;
         }
 
         private bool CanUpdateCustomer()

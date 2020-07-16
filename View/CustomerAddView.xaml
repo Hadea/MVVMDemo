@@ -8,7 +8,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerAddView">
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Path=NewCustomerCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -37,23 +41,17 @@
         <Label Content="_Telefonnummer" Grid.Row="3" Grid.Column="2"/>
         <Label Content="_FaxNummer" Grid.Row="4" Grid.Column="2"/>
 
-        <TextBox TabIndex="1" DataContext="{Binding SelectedCustomer}" Text="{Binding CustomerID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Grid.Column="1">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="LostFocus">
-                    <i:InvokeCommandAction Command="{Binding InsertCustomerCommand.RaiseCanExecuteChanged}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </TextBox>
-        <TextBox TabIndex="2" DataContext="{Binding SelectedCustomer}" Text="{Binding CompanyName , Mode=TwoWay}" Grid.Row="1" Grid.Column="1"/>
-        <TextBox TabIndex="3" DataContext="{Binding SelectedCustomer}" Text="{Binding ContactName   , Mode=TwoWay}"  Grid.Row="2" Grid.Column="1"/>
-        <TextBox TabIndex="4" DataContext="{Binding SelectedCustomer}" Text="{Binding ContactTitle  , Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
-        <TextBox TabIndex="5" DataContext="{Binding SelectedCustomer}" Text="{Binding Address  , Mode=TwoWay}"  Grid.Row="4" Grid.Column="1"/>
-        <TextBox TabIndex="6" DataContext="{Binding SelectedCustomer}" Text="{Binding City , Mode=TwoWay}"  Grid.Row="5" Grid.Column="1"/>
-        <TextBox TabIndex="7" DataContext="{Binding SelectedCustomer}" Text="{Binding Region , Mode=TwoWay}"  Grid.Row="0" Grid.Column="3"/>
-        <TextBox TabIndex="8" DataContext="{Binding SelectedCustomer}" Text="{Binding PostalCode , Mode=TwoWay}"  Grid.Row="1" Grid.Column="3"/>
-        <TextBox TabIndex="9" DataContext="{Binding SelectedCustomer}" Text="{Binding Country , Mode=TwoWay}"  Grid.Row="2" Grid.Column="3"/>
-        <TextBox TabIndex="10" DataContext="{Binding SelectedCustomer}" Text="{Binding Phone  , Mode=TwoWay}"  Grid.Row="3" Grid.Column="3"/>
-        <TextBox TabIndex="11" DataContext="{Binding SelectedCustomer}" Text="{Binding Fax  , Mode=TwoWay}"  Grid.Row="4" Grid.Column="3"/>
+        <TextBox TabIndex="1" Text="{Binding Path=SelectedCustomer.CustomerID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Grid.Column="1"/>
+        <TextBox TabIndex="2" Text="{Binding Path=SelectedCustomer.CompanyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
+        <TextBox TabIndex="3" Text="{Binding Path=SelectedCustomer.ContactName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="2" Grid.Column="1"/>
+        <TextBox TabIndex="4" Text="{Binding Path=SelectedCustomer.ContactTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1"/>
+        <TextBox TabIndex="5" Text="{Binding Path=SelectedCustomer.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="4" Grid.Column="1"/>
+        <TextBox TabIndex="6" Text="{Binding Path=SelectedCustomer.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="5" Grid.Column="1"/>
+        <TextBox TabIndex="7" Text="{Binding Path=SelectedCustomer.Region, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Grid.Column="3"/>
+        <TextBox TabIndex="8" Text="{Binding Path=SelectedCustomer.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="1" Grid.Column="3"/>
+        <TextBox TabIndex="9" Text="{Binding Path=SelectedCustomer.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="2" Grid.Column="3"/>
+        <TextBox TabIndex="10" Text="{Binding Path=SelectedCustomer.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="3" Grid.Column="3"/>
+        <TextBox TabIndex="11" Text="{Binding Path=SelectedCustomer.Fax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="4" Grid.Column="3"/>
         <Button Content="Anlegen" Command="{Binding Path=InsertCustomerCommand}" Grid.Column="3" Grid.Row="5" />
         <Button Content="Neu" Command="{Binding Path=NewCustomerCommand}" Grid.Column="2" Grid.Row="5" />
 
